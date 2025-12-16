@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TPMS - Telegram Publishing Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-effect { backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.1); }
+        .hover-lift { transition: all 0.3s ease; }
+        .hover-lift:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .pulse-dot { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .slide-in { animation: slideIn 0.6s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                        <i class="fab fa-telegram-plane text-white text-xl"></i>
+                    </div>
+                    <h1 class="text-xl font-bold gradient-text">TPMS</h1>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-gray-700 hover:text-blue-600 transition-colors font-medium">Панель</a>
+                    <a href="posts.html" class="text-gray-700 hover:text-blue-600 transition-colors font-medium">Публикации</a>
+                    <a href="channels.html" class="text-gray-700 hover:text-blue-600 transition-colors font-medium">Каналы</a>
+                    <a href="calendar.html" class="text-gray-700 hover:text-blue-600 transition-colors font-medium">Календарь</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-bell text-gray-600"></i>
+                    </button>
+                    <div class="w-8 h-8 bg-gradient-to-br from-green-400 to-blue-500 rounded-full"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="mb-8 slide-in">
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">Панель управления</h2>
+            <p class="text-gray-600">Общая статистика и график публикаций</p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-2xl p-6 shadow-sm hover-lift slide-in">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-file-alt text-yellow-600 text-xl"></i>
+                    </div>
+                    <span class="text-xs text-gray-500">+12 сегодня</span>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-1">24</h3>
+                <p class="text-gray-600 text-sm">Черновики</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm hover-lift slide-in">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-clock text-blue-600 text-xl"></i>
+                    </div>
+                    <span class="text-xs text-gray-500">+5 сегодня</span>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-1">156</h3>
+                <p class="text-gray-600 text-sm">Запланировано</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm hover-lift slide-in">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                    </div>
+                    <span class="text-xs text-gray-500">+89 сегодня</span>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-1">1,247</h3>
+                <p class="text-gray-600 text-sm">Опубликовано</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm hover-lift slide-in">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-exclamation-triangle text-red-600 text-xl"></i>
+                    </div>
+                    <span class="text-xs text-gray-500">-3 сегодня</span>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-1">8</h3>
+                <p class="text-gray-600 text-sm">Ошибки</p>
+            </div>
+        </div>
+
+        <!-- Charts and Activity -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+            <!-- Chart -->
+            <div class="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm slide-in">
+                <h3 class="text-lg font-semibold text-gray-900 mb-6">График публикаций за 7 дней</h3>
+                <div id="publicationChart" class="h-80"></div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm slide-in">
+                <h3 class="text-lg font-semibold text-gray-900 mb-6">Последние действия</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-plus text-blue-600 text-xs"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-900">Создан новый пост</p>
+                            <p class="text-xs text-gray-500">в канале "Tech News" • 2 мин назад</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-check text-green-600 text-xs"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-900">Публикация выполнена</p>
+                            <p class="text-xs text-gray-500">в канале "Бизнес" • 15 мин назад</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-exclamation text-red-600 text-xs"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-900">Ошибка публикации</p>
+                            <p class="text-xs text-gray-500">в канале "Новости" • 1 час назад</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-edit text-purple-600 text-xs"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-900">Редактирование поста</p>
+                            <p class="text-xs text-gray-500">в канале "Маркетинг" • 2 часа назад</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm slide-in">
+            <h3 class="text-lg font-semibold text-gray-900 mb-6">Быстрые действия</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <button onclick="showModal('newPost')" class="flex items-center justify-center space-x-3 p-4 border-2 border-dashed border-gray-300 rounded-xl hover:border-blue-400 hover:bg-blue-50 transition-all">
+                    <i class="fas fa-plus text-blue-600"></i>
+                    <span class="text-gray-700 font-medium">Создать пост</span>
+                </button>
+                <button onclick="showModal('schedulePost')" class="flex items-center justify-center space-x-3 p-4 border-2 border-dashed border-gray-300 rounded-xl hover:border-green-400 hover:bg-green-50 transition-all">
+                    <i class="fas fa-calendar-plus text-green-600"></i>
+                    <span class="text-gray-700 font-medium">Запланировать</span>
+                </button>
+                <button onclick="showModal('addChannel')" class="flex items-center justify-center space-x-3 p-4 border-2 border-dashed border-gray-300 rounded-xl hover:border-purple-400 hover:bg-purple-50 transition-all">
+                    <i class="fas fa-plus-circle text-purple-600"></i>
+                    <span class="text-gray-700 font-medium">Добавить канал</span>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 transform transition-all">
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Календарь - TPMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-effect { backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.1); }
+        .hover-lift { transition: all 0.3s ease; }
+        .hover-lift:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .slide-in { animation: slideIn 0.6s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .calendar-day { transition: all 0.2s ease; }
+        .calendar-day:hover { background-color: #f3f4f6; }
+        .calendar-day.today { background-color: #dbeafe; }
+        .calendar-day.has-posts { position: relative; }
+        .calendar-day.has-posts::after { content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 6px; height: 6px; background-color: #3b82f6; border-radius: 50%; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                        <i class="fab fa-telegram-plane text-white text-xl"></i>
+                    </div>
+                    <h1 class="text-xl font-bold gradient-text">TPMS</h1>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 transition-colors font-medium">Панель</a>
+                    <a href="posts.html" class="text-gray-700 hover:text-blue-600 transition-colors font-medium">Публикации</a>
+                    <a href="channels.html" class="text-gray-700 hover:text-blue-600 transition-colors font-medium">Каналы</a>
+                    <a href="#" class="text-blue-600 font-medium">Календарь</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-bell text-gray-600"></i>
+                    </button>
+                    <div class="w-8 h-8 bg-gradient-to-br from-green-400 to-blue-500 rounded-full"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 slide-in">
+            <div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Календарь публикаций</h2>
+                <p class="text-gray-600">Планирование и расписание контента</p>
+            </div>
+            <div class="flex items-center space-x-4 mt-4 sm:mt-0">
+                <button class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                    <i class="fas fa-chevron-left mr-2"></i>Назад
+                </button>
+                <h3 class="text-xl font-semibold text-gray-900">Июнь 2025</h3>
+                <button class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                    Вперед<i class="fas fa-chevron-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Calendar -->
+            <div class="lg:col-span-3">
+                <div class="bg-white rounded-2xl shadow-sm overflow-hidden slide-in">
+                    <div class="grid grid-cols-7 gap-px bg-gray-200">
+                        <!-- Days of week -->
+                        <div class="bg-gray-50 p-4 text-center text-sm font-medium text-gray-700">Пн</div>
+                        <div class="bg-gray-50 p-4 text-center text-sm font-medium text-gray-700">Вт</div>
+                        <div class="bg-gray-50 p-4 text-center text-sm font-medium text-gray-700">Ср</div>
+                        <div class="bg-gray-50 p-4 text-center text-sm font-medium text-gray-700">Чт</div>
+                        <div class="bg-gray-50 p-4 text-center text-sm font-medium text-gray-700">Пт</div>
+                        <div class="bg-gray-50 p-4 text-center text-sm font-medium text-gray-700">Сб</div>
+                        <div class="bg-gray-50 p-4 text-center text-sm font-medium text-gray-700">Вс</div>
+                        
+                        <!-- Calendar days -->
+                        <div class="bg-white p-4 h-24 calendar-day"></div>
+                        <div class="bg-white p-4 h-24 calendar-day"></div>
+                        <div class="bg-white p-4 h-24 calendar-day"></div>
+                        <div class="bg-white p-4 h-24 calendar-day"></div>
+                        <div class="bg-white p-4 h-24 calendar-day"></div>
+                        <div class="bg-white p-4 h-24 calendar-day">1</div>
+                        <div class="bg-white p-4 h-24 calendar-day">2</div>
+                        
+                        <div class="bg-white p-4 h-24 calendar-day">3</div>
+                        <div class="bg-white p-4 h-24 calendar-day">4</div>
+                        <div class="bg-white p-4 h-24 calendar-day">5</div>
+                        <div class="bg-white p-4 h-24 calendar-day">6</div>
+                        <div class="bg-white p-4 h-24 calendar-day">7</div>
+                        <div class="bg-white p-4 h-24 calendar-day">8</div>
+                        <div class="bg-white p-4 h-24 calendar-day">9</div>
+                        
+                        <div class="bg-white p-4 h-24 calendar-day has-posts">10</div>
+                        <div class="bg-white p-4 h-24 calendar-day">11</div>
+                        <div class="bg-white p-4 h-24 calendar-day has-posts">12</div>
+                        <div class="bg-white p-4 h-24 calendar-day">13</div>
+                        <div class="bg-white p-4 h-24 calendar-day has-posts">14</div>
+                        <div class="bg-white p-4 h-24 calendar-day">15</div>
+                        <div class="bg-white p-4 h-24 calendar-day">16</div>
+                        
+                        <div class="bg-white p-4 h-24 calendar-day today has-posts">17</div>
+                        <div class="bg-white p-4 h-24 calendar-day">18</div>
+                        <div class="bg-white p-4 h-24 calendar-day has-posts">19</div>
+                        <div class="bg-white p-4 h-24 calendar-day">20</div>
+                        <div class="bg-white p-4 h-24 calendar-day has-posts">21</div>
+                        <div class="bg-white p-4 h-24 calendar-day">22</div>
+                        <div class="bg-white p-4 h-24 calendar-day">23</div>
+                        
+                        <div class="bg-white p-4 h-24 calendar-day has-posts">24</div>
+                        <div class="bg-white p-4 h-24 calendar-day">25</div>
+                        <div class="bg-white p-4 h-24 calendar-day has-posts">26</div>
+                        <div class="bg-white p-4 h-24 calendar-day">27</div>
+                        <div class="bg-white p-4 h-24 calendar-day has-posts">28</div>
+                        <div class="bg-white p-4 h-24 calendar-day">29</div>
+                        <div class="bg-white p-4 h-24 calendar-day">30</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="space-y-6">
+                <!-- Today's Posts -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm slide-in">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Сегодня, 17 июня</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-clock text-blue-600 text-xs"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-1">
+                                    <h4 class="text-sm font-medium text-gray-900">Новости технологий</h4>
+                                    <span class="text-xs text-gray-500">14:30</span>
+                                </div>
+                                <p class="text-xs text-gray-600 mb-2">Tech News</p>
+                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                    Запланировано
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-check text-green-600 text-xs"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-1">
+                                    <h4 class="text-sm font-medium text-gray-900">Советы по маркетингу</h4>
+                                    <span class="text-xs text-gray-500">10:15</span>
+                                </div>
+                                <p class="text-xs text-gray-600 mb-2">Маркетинг</p>
+                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    Опубликовано
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-file text-yellow-600 text-xs"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-1">
+                                    <h4 class="text-sm font-medium text-gray-900">Финансовый обзор</h4>
+                                    <span class="text-xs text-gray-500">16:00</span>
+                                </div>
+                                <p class="text-xs text-gray-600 mb-2">Бизнес</p>
+                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Черновик
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm slide-in">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Быстрые действия</h3>
+                    <div class="space-y-3">
+                        <button onclick="showModal('newPost')" class="w-full flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                            <i class="fas fa-plus text-blue-600"></i>
+                            <span class="text-gray-700 font-medium">Создать пост</span>
+                        </button>
+                        <button onclick="showModal('schedulePost')" class="w-full flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                            <i class="fas fa-calendar-plus text-green-600"></i>
+                            <span class="text-gray-700 font-medium">Запланировать</span>
+                        </button>
+                        <button class="w-full flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                            <i class="fas fa-eye text-purple-600"></i>
+                            <span class="text-gray-700 font-medium">Предпросмотр</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Legend -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm slide-in">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Обозначения</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-4 h-4 bg-blue-500 rounded-full"></div>
+                            <span class="text-sm text-gray-700">Есть запланированные посты</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-4 h-4 bg-blue-200 rounded-full"></div>
+                            <span class="text-sm text-gray-700">Сегодняшний день</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-4 h-4 border-2 border-gray-300 rounded-full"></div>
+                            <span class="text-sm text-gray-700">Нет постов</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 max-w-2xl w-full mx-4 transform transition-all max-h-[90vh] overflow-y-auto">
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каналы - TPMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-effect { backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.1); }
+        .hover-lift { transition: all 0.3s ease; }
+        .hover-lift:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .slide-in { animation: slideIn 0.6s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                        <i class="fab fa-telegram-plane text-white text-xl"></i>
+                    </div>
+                    <h1 class="text-xl font-bold gradient-text">TPMS</h1>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 transition-colors font-medium">Панель</a>
+                    <a href="posts.html" class="text-gray-700 hover:text-blue-600 transition-colors font-medium">Публикации</a>
+                    <a href="#" class="text-blue-600 font-medium">Каналы</a>
+                    <a href="calendar.html" class="text-gray-700 hover:text-blue-600 transition-colors font-medium">Календарь</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-bell text-gray-600"></i>
+                    </button>
+                    <div class="w-8 h-8 bg-gradient-to-br from-green-400 to-blue-500 rounded-full"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 slide-in">
+            <div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Каналы</h2>
+                <p class="text-gray-600">Управление Telegram-каналами и ботами</p>
+            </div>
+            <button onclick="showModal('addChannel')" class="mt-4 sm:mt-0 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-xl hover:shadow-lg transition-all">
+                <i class="fas fa-plus mr-2"></i>Добавить канал
+            </button>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white rounded-2xl p-6 shadow-sm hover-lift slide-in">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-hashtag text-blue-600 text-xl"></i>
+                    </div>
+                    <span class="text-xs text-gray-500">Активные</span>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-1">12</h3>
+                <p class="text-gray-600 text-sm">Публичных каналов</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm hover-lift slide-in">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-lock text-purple-600 text-xl"></i>
+                    </div>
+                    <span class="text-xs text-gray-500">Приватные</span>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-1">8</h3>
+                <p class="text-gray-600 text-sm">Приватных каналов</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm hover-lift slide-in">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-robot text-green-600 text-xl"></i>
+                    </div>
+                    <span class="text-xs text-gray-500">Подключено</span>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-1">15</h3>
+                <p class="text-gray-600 text-sm">Активных ботов</p>
+            </div>
+        </div>
+
+        <!-- Channels Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white rounded-2xl p-6 shadow-sm hover-lift slide-in">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-microchip text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900">Tech News</h3>
+                            <p class="text-sm text-gray-500">@technews_daily</p>
+                        </div>
+                    </div>
+                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                        <div class="w-1.5 h-1.5 bg-green-600 rounded-full mr-1.5"></div>
+                        Активен
+                    </span>
+                </div>
+                <div class="space-y-3 mb-4">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Подписчиков:</span>
+                        <span class="font-medium">15,234</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Публикаций:</span>
+                        <span class="font-medium">89</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Последняя публикация:</span>
+                        <span class="font-medium">2 часа назад</span>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                    <span class="text-xs text-gray-500">Бот: TechBot_v2</span>
+                    <div class="flex space-x-2">
+                        <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                            <i class="fas fa-edit text-sm"></i>
+                        </button>
+                        <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                            <i class="fas fa-trash text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm hover-lift slide-in">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-bullhorn text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900">Маркетинг</h3>
+                            <p class="text-sm text-gray-500">@marketing_pro</p>
+                        </div>
+                    </div>
+                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                        <div class="w-1.5 h-1.5 bg-green-600 rounded-full mr-1.5"></div>
+                        Активен
+                    </span>
+                </div>
+                <div class="space-y-3 mb-4">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Подписчиков:</span>
+                        <span class="font-medium">8,567</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Публикаций:</span>
+                        <span class="font-medium">156</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Последняя публикация:</span>
+                        <span class="font-medium">5 часов назад</span>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                    <span class="text-xs text-gray-500">Бот: MarketingBot</span>
+                    <div class="flex space-x-2">
+                        <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                            <i class="fas fa-edit text-sm"></i>
+                        </button>
+                        <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                            <i class="fas fa-trash text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm hover-lift slide-in">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-chart-line text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900">Бизнес</h3>
+                            <p class="text-sm text-gray-500">@business_insider</p>
+                        </div>
+                    </div>
+                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                        <div class="w-1.5 h-1.5 bg-green-600 rounded-full mr-1.5"></div>
+                        Активен
+                    </span>
+                </div>
+                <div class="space-y-3 mb-4">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Подписчиков:</span>
+                        <span class="font-medium">12,345</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Публикаций:</span>
+                        <span class="font-medium">234</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Последняя публикация:</span>
+                        <span class="font-medium">1 день назад</span>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                    <span class="text-xs text-gray-500">Бот: BusinessBot</span>
+                    <div class="flex space-x-2">
+                        <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                            <i class="fas fa-edit text-sm"></i>
+                        </button>
+                        <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                            <i class="fas fa-trash text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm hover-lift slide-in">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-lock text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900">Корпоративные новости</h3>
+                            <p class="text-sm text-gray-500">Приватный канал</p>
+                        </div>
+                    </div>
+                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                        <i class="fas fa-lock mr-1"></i>
+                        Приватный
+                    </span>
+                </div>
+                <div class="space-y-3 mb-4">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Участников:</span>
+                        <span class="font-medium">234</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Публикаций:</span>
+                        <span class="font-medium">45</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Последняя публикация:</span>
+                        <span class="font-medium">3 часа назад</span>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                    <span class="text-xs text-gray-500">Бот: CorpBot</span>
+                    <div class="flex space-x-2">
+                        <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                            <i class="fas fa-edit text-sm"></i>
+                        </button>
+                        <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                            <i class="fas fa-trash text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm hover-lift slide-in">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-exclamation-triangle text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900">Ошибка подключения</h3>
+                            <p class="text-sm text-gray-500">Проверьте токен бота</p>
+                        </div>
+                    </div>
+                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                        <i class="fas fa-exclamation mr-1"></i>
+                        Ошибка
+                    </span>
+                </div>
+                <div class="space-y-3 mb-4">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Последняя проверка:</span>
+                        <span class="font-medium">1 час назад</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Ошибка:</span>
+                        <span class="font-medium text-red-600">Invalid token</span>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                    <span class="text-xs text-gray-500">Бот: OldBot</span>
+                    <div class="flex space-x-2">
+                        <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                            <i class="fas fa-edit text-sm"></i>
+                        </button>
+                        <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                            <i class="fas fa-trash text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Channel Card -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm hover-lift slide-in border-2 border-dashed border-gray-300">
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-plus text-gray-400 text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Добавить канал</h3>
+                    <p class="text-sm text-gray-500 mb-4">Подключите новый Telegram-канал к системе</p>
+                    <button onclick="showModal('addChannel')" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg hover:shadow-lg transition-all">
+                        Подключить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 max-w-2xl w-full mx-4 transform transition-all max-h-[90vh] overflow-y-auto">
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
