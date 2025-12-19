@@ -1,5 +1,23 @@
 # TPMS - Telegram Publishing Management System
 
+## 📚 Документация
+
+### 🚀 Начните отсюда
+- **[QUICK_START.md](QUICK_START.md)** - Установка за 5 минут и первый запуск
+
+### 📊 Анализ проекта
+- **[TG_manager_summary.md](TG_manager_summary.md)** - Краткое резюме (для менеджеров)
+- **[TG_manager_analysis.md](TG_manager_analysis.md)** - Полный анализ архитектуры (для разработчиков)
+- **[TG_manager_technical_recommendations.md](TG_manager_technical_recommendations.md)** - Технические рекомендации и best practices
+
+### 🗺️ Развитие проекта
+- **[TG_manager_roadmap.md](TG_manager_roadmap.md)** - Дорожная карта развития на 6 месяцев
+
+### ✅ Для разработчиков
+- **[DEVELOPER_CHECKLIST.md](DEVELOPER_CHECKLIST.md)** - Чек-листы для разработки
+- **[INDEX.md](INDEX.md)** - Полный индекс всех документов
+
+
 Профессиональная система для централизованного управления публикациями в Telegram-каналах.
 
 ## 📋 Содержание
