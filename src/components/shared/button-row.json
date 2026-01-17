@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_button_rows",
+  "info": {
+    "displayName": "Button Row",
+    "icon": "bars"
+  },
+  "options": {},
+  "attributes": {
+    "buttons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.telegram-button"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "channels",
+  "info": {
+    "singularName": "channel",
+    "pluralName": "channels",
+    "displayName": "Channel",
+    "description": "Telegram channel configuration"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255
+    },
+    "username": {
+      "type": "string",
+      "unique": true
+    },
+    "chat_id": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "invite_link": {
+      "type": "text"
+    },
+    "is_private": {
+      "type": "boolean",
+      "default": false
+    },
+    "bot_token_enc": {
+      "type": "text",
+      "private": true
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "last_checked": {
+      "type": "datetime"
+    }
+  }
+}

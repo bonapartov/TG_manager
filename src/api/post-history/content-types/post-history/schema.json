@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "posts_history",
+  "info": {
+    "singularName": "post-history",
+    "pluralName": "posts-history",
+    "displayName": "Post History",
+    "description": "Version control for posts"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "post": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::posts.post"
+    },
+    "diff": {
+      "type": "json",
+      "required": true
+    },
+    "action": {
+      "type": "enumeration",
+      "enum": ["created", "updated", "published", "deleted"],
+      "required": true
+    }
+  }
+}

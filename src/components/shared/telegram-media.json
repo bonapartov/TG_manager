@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_shared_telegram_medias",
+  "info": {
+    "displayName": "Telegram Media",
+    "icon": "picture"
+  },
+  "options": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": ["photo", "video", "document"],
+      "default": "photo",
+      "required": true
+    },
+    "file": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images", "videos", "files"]
+    },
+    "external_url": {
+        "type": "string",
+        "required": false
+    },
+    "caption": {
+      "type": "text"
+    }
+  }
+}

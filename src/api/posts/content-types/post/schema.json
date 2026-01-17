@@ -1,0 +1,70 @@
+{
+  "kind": "collectionType",
+  "collectionName": "posts",
+  "info": {
+    "singularName": "post",
+    "pluralName": "posts",
+    "displayName": "Post",
+    "description": "Planned and published posts to Telegram"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "channel": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::channels.channel"
+    },
+    "content": {
+      "type": "text",
+      "required": true
+    },
+    "parse_mode": {
+      "type": "enumeration",
+      "enum": ["Markdown", "HTML"],
+      "default": "Markdown"
+    },
+    "media": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.telegram-media"
+    },
+    "buttons": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.button-row"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["draft", "scheduled", "published", "error", "cancelled"],
+      "default": "draft"
+    },
+    "publish_at": {
+      "type": "datetime"
+    },
+    "published_msg_id": {
+      "type": "integer",
+      "private": true
+    },
+    "error_message": {
+      "type": "text"
+    },
+    "retry_count": {
+      "type": "integer",
+      "default": 0
+    },
+    "disable_notification": {
+      "type": "boolean",
+      "default": false
+    },
+    "protect_content": {
+      "type": "boolean",
+      "default": false
+    },
+    "has_spoiler": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

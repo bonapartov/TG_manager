@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "audit_log",
+  "info": {
+    "singularName": "audit-log",
+    "pluralName": "audit-logs",
+    "displayName": "Audit Log",
+    "description": "System audit logs"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "action": {
+      "type": "enumeration",
+      "enum": ["login", "logout", "create", "update", "delete", "publish", "schedule", "cancel"],
+      "required": true
+    },
+    "object_type": {
+      "type": "enumeration",
+      "enum": ["user", "channel", "post", "settings"],
+      "required": true
+    },
+    "object_id": {
+      "type": "integer"
+    },
+    "ip_address": {
+      "type": "string"
+    },
+    "user_agent": {
+      "type": "text"
+    },
+    "details": {
+      "type": "json"
+    }
+  }
+}
